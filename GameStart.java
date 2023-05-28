@@ -11,19 +11,19 @@ public class GameStart extends Main {
         System.out.println("Choose a class: w for warrior, r for ranger, m for mage");
         // TODO uncomment playerclass = scan.nextLine();
         playerclass = "w";
-        LifeForm player = new LifeForm(playername, 0, 0, 0, "pheasant", true);
+        Player player = new Player(playername, 0, 0, 0, "pheasant", true, 0, 0);
         // Use switch case
         if(playerclass.charAt(0) == 'w'){
             System.out.println("Warrior");
-            player = new LifeForm(playername, 50, 0, 10, "warrior", true);
+            player = new Player(playername, 50, 20, 10, "warrior", true, 0, 1);
         }
         if(playerclass.charAt(0) == 'r'){
             System.out.println("ranger");
-            player = new LifeForm(playername, 50, 0, 10, "ranger", true);
+            player = new Player(playername, 50, 20, 10, "ranger", true, 0, 1);
         }
         if(playerclass.charAt(0) == 'm'){
             System.out.println("mage");
-            player = new LifeForm(playername, 50, 10, 10, "mage", true);
+            player = new Player(playername, 50, 20, 10, "mage", true, 0, 1);
         }
         else {
             System.out.println("Please input one of the requested characters");   

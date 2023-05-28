@@ -50,28 +50,28 @@ public class Encounter {
         enemytype();
         enemyclass();
         System.out.println("You encounter an enemy!");
-        LifeForm enemy = new LifeForm(enemytype(), 50, 0, 10, enemyclass(), true);
+        LifeForm enemy = new LifeForm(enemytype(), 50, 10, 10, enemyclass(), true);
         GamePlay.showstats(enemy);
         while (battle == true) {
-        System.out.println("Do you want to attack or flee?");
-        System.out.println("a/f?");
-        action = scan.nextLine();
-        if(action.charAt(0) == 'a'){
-            enemy.takedamage(FightLogic.attack(player)); // Enemy takes damage when player attacks and vice versa. Player attacks first.
-            if (enemy.alive && player.alive == true){
-                player.takedamage(FightLogic.attack(enemy));
+            System.out.println("Do you want to attack or flee?");
+            System.out.println("a/f?");
+            action = scan.nextLine();
+            if(action.charAt(0) == 'a'){
+                enemy.takedamage(FightLogic.attack(player)); // Enemy takes damage when player attacks and vice versa. Player attacks first.
+                if (enemy.alive & player.alive == true){
+                    player.takedamage(FightLogic.attack(enemy));
+                }
+                if ((enemy.alive & player.alive) == false){
+                    battle = false;
+                }
             }
-            if (enemy.alive && player.alive != true){
+            else if(action.charAt(0) == 'f'){
+                FightLogic.flee();
                 battle = false;
             }
-        }
-        else if(action.charAt(0) == 'f'){
-            FightLogic.flee();
-            battle = false;
-        }
-        else {
-            System.out.println("Please input one of the requested characters.");   
-        }
+            else {
+                System.out.println("Please input one of the requested characters.");   
+            }
         }
         if (player.alive == false){
             System.out.println("Game over!");
@@ -84,10 +84,6 @@ public class Encounter {
             else if(yesno.charAt(0) == 'n'){
                 System.exit(0);
             }
-            else {
-                System.out.println("Please input one of the requested characters.");   
-            }
-
     }
     }
 }

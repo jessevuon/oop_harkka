@@ -7,7 +7,7 @@ public class GamePlay{
         
     }
     public static void showstats(LifeForm creature){
-        System.out.println("Name: " + creature.name + " Health: " + creature.hp + " Attack power: " + creature.attack + " Mana: " + creature.mana + " Class: " + creature.fightclass);
+        System.out.println("Name: " + creature.name + ", Health: " + creature.hp + ", Attack power: " + creature.attack + ", Mana: " + creature.mana + ", Class: " + creature.fightclass);
     }
     public static void gameloop(LifeForm player) {
         showstats(player);
