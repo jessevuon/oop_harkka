@@ -46,23 +46,48 @@ public class Encounter {
     public static void fight(LifeForm player) {
         Boolean battle = true;
         String action = "";
+        String yesno = "";
         enemytype();
         enemyclass();
         System.out.println("You encounter an enemy!");
-        LifeForm enemy = new LifeForm(enemytype(), 5, 0, 10, enemyclass());
+        LifeForm enemy = new LifeForm(enemytype(), 50, 0, 10, enemyclass(), true);
         GamePlay.showstats(enemy);
         while (battle == true) {
         System.out.println("Do you want to attack or flee?");
         System.out.println("a/f?");
         action = scan.nextLine();
         if(action.charAt(0) == 'a'){
-            FightLogic.attack(player);
-            FightLogic.attack(enemy);
+            enemy.takedamage(FightLogic.attack(player)); // Enemy takes damage when player attacks and vice versa. Player attacks first.
+            if (enemy.alive && player.alive == true){
+                player.takedamage(FightLogic.attack(enemy));
+            }
+            if (enemy.alive && player.alive != true){
+                battle = false;
+            }
         }
         else if(action.charAt(0) == 'f'){
             FightLogic.flee();
             battle = false;
         }
+        else {
+            System.out.println("Please input one of the requested characters.");   
         }
+        }
+        if (player.alive == false){
+            System.out.println("Game over!");
+            System.out.println("Would you like to start a new game?");
+            System.out.println("y/n?");
+            yesno = scan.nextLine();
+            if(yesno.charAt(0) == 'y'){
+                GameStart.start();
+            }
+            else if(yesno.charAt(0) == 'n'){
+                System.exit(0);
+            }
+            else {
+                System.out.println("Please input one of the requested characters.");   
+            }
+
+    }
     }
 }
