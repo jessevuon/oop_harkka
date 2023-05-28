@@ -6,21 +6,26 @@ public class GameStart extends Main {
         String playername;
         System.out.println("Welcome to the game!");
         System.out.println("Please type your name: ");
-        playername = scan.nextLine();
+        playername = "jesse";
+        // TODO uncomment playername = scan.nextLine();
         System.out.println("Choose a class: w for warrior, r for ranger, m for mage");
-        playerclass = scan.nextLine();
+        // TODO uncomment playerclass = scan.nextLine();
+        playerclass = "w";
+        LifeForm player = new LifeForm(playername, 0, 0, 0, "pheasant");
+        // Use switch case
         if(playerclass.charAt(0) == 'w'){
             System.out.println("Warrior");
-            LifeForm player = new LifeForm(playername, 10, 0, 10, 1);
+            player = new LifeForm(playername, 10, 0, 10, "warrior");
         }
         if(playerclass.charAt(0) == 'r'){
             System.out.println("ranger");
-            LifeForm player = new LifeForm(playername, 10, 0, 10, 2);
+            player = new LifeForm(playername, 10, 0, 10, "ranger");
         }
         if(playerclass.charAt(0) == 'm'){
             System.out.println("mage");
-            LifeForm player = new LifeForm(playername, 10, 10, 10, 3);
+            player = new LifeForm(playername, 10, 10, 10, "mage");
         }
         System.out.println("Your adventure begins!");
+        GamePlay.gameloop(player);
     }
 }
