@@ -13,6 +13,7 @@ public class GamePlay{
         showstats(player);
         System.out.println("You move forward");
         Encounter.encounter(player);
+        
 }
 }
 

@@ -38,19 +38,24 @@ public class Encounter {
             sage(player);
         }
     }
-    public static void sage(LifeForm player) {
+    public static int sage(LifeForm player) {
+        int experiencegain = 0;
         System.out.println("You encounter a Sage!");
-        System.out.println("Greetings adverturer! Are you on a quest to slay the Demon Lord? Allow me to assist you by giving you an aptitude boost!");
+        System.out.println("Greetings adventurer! Are you on a quest to slay the Demon Lord? Allow me to assist you by giving you an aptitude boost!");
         System.out.println("You have gained exprience!");
-    }
-    public static void fight(LifeForm player) {
+        experiencegain = Dice.roll(10)*5;
+        return experiencegain;
+        }
+    public static int fight(LifeForm player) {
         Boolean battle = true;
+        int experiencegain = 0;
         String action = "";
         String yesno = "";
         enemytype();
         enemyclass();
         System.out.println("You encounter an enemy!");
         LifeForm enemy = new LifeForm(enemytype(), 50, 10, 10, enemyclass(), true);
+        experiencegain = enemy.hp * 2;
         GamePlay.showstats(enemy);
         while (battle == true) {
             System.out.println("Do you want to attack or flee?");
@@ -67,6 +72,7 @@ public class Encounter {
             }
             else if(action.charAt(0) == 'f'){
                 FightLogic.flee();
+                experiencegain = experiencegain/40;
                 battle = false;
             }
             else {
@@ -84,6 +90,11 @@ public class Encounter {
             else if(yesno.charAt(0) == 'n'){
                 System.exit(0);
             }
-    }
+        }
+        else{
+            System.out.println("You defeated the enemy!");
+            System.out.println("You have gained " + experiencegain + " experience!");
+        }
+    return experiencegain;
     }
 }
