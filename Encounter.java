@@ -15,46 +15,72 @@ public class Encounter {
         }
         return enemyclass;    
     }
-    public static String enemytype() {
+    public static String enemytype(Player player) {
         String enemytype = "fetchling";
-        int x = Dice.roll(3);
+        int x = 0;
+        int playerlevel = player.level;
+        x = Dice.roll(3);
         if (x == 1){
             enemytype = "goblin";
+            if (playerlevel < 3){
+                enemytype = "goblin";
+            }
+            else {
+                enemytype = "hobgoblin";
+            }
         }
         else if (x == 2){
-            enemytype = "hobgoblin";
+            if (playerlevel < 4){
+                enemytype = "imp";
+            }
+            else {
+                enemytype = "demon";
+            }
         }
         else if (x == 3){
-            enemytype = "demon";
+            if (playerlevel < 4){
+                enemytype = "orc";
+            }
+            else {
+                enemytype = "Uruk-hai"; // :)
+            }
         }
+
         return enemytype;  
     }
-    public static void encounter(LifeForm player) {
+    public static void encounter(Player player, Boolean fightdemonlord) {
+        int experiencegain = 0;
         int x = Dice.roll(6);
         if (x > 1){
-            fight(player);
+            experiencegain = fight(player, fightdemonlord);
         }
         else {
-            sage(player);
+            experiencegain = sage(player);
         }
+        player.gainexperience(experiencegain, player);
     }
-    public static int sage(LifeForm player) {
+    public static int sage(Player player) {
         int experiencegain = 0;
         System.out.println("You encounter a Sage!");
         System.out.println("Greetings adventurer! Are you on a quest to slay the Demon Lord? Allow me to assist you by giving you an aptitude boost!");
-        System.out.println("You have gained exprience!");
         experiencegain = Dice.roll(10)*5;
+        System.out.println("You have gained " + experiencegain + " experience!");
         return experiencegain;
         }
-    public static int fight(LifeForm player) {
+    public static int fight(Player player, boolean fightdemonlord) {
         Boolean battle = true;
         int experiencegain = 0;
         String action = "";
         String yesno = "";
-        enemytype();
+        enemytype(player);
         enemyclass();
         System.out.println("You encounter an enemy!");
-        LifeForm enemy = new LifeForm(enemytype(), 50, 10, 10, enemyclass(), true);
+        LifeForm enemy = new LifeForm(enemytype(player), (40+player.level*5), (40+player.level*5), 10+(player.level*5), 10+(player.level*5), 10+(player.level*5), enemyclass(), true);
+        
+        if (fightdemonlord == true)
+        {
+            enemy = new LifeForm("Demon Lord", (80+player.level*5), (80+player.level*5), 30+(player.level*5), 100+(player.level*5), 100+(player.level*5), enemyclass(), true);
+        }
         experiencegain = enemy.hp * 2;
         GamePlay.showstats(enemy);
         while (battle == true) {
