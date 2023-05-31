@@ -79,7 +79,7 @@ public class Encounter {
         
         if (fightdemonlord == true)
         {
-            enemy = new LifeForm("Demon Lord", (80+player.level*5), (80+player.level*5), 30+(player.level*5), 100+(player.level*5), 100+(player.level*5), enemyclass(), true);
+            enemy = new LifeForm("Demon Lord", (120+player.level*5), (120+player.level*5), 30+(player.level*5), 100+(player.level*5), 100+(player.level*5), enemyclass(), true);
         }
         experiencegain = enemy.hp * 2;
         GamePlay.showstats(enemy);
@@ -117,9 +117,26 @@ public class Encounter {
                 System.exit(0);
             }
         }
-        else{
+        else if (enemy.alive == false){
+            if (fightdemonlord == true)
+            {
+                System.out.println("Congratulations! You have defeated the Demon Lord!");
+                System.out.println("You are the hero of mankind!");
+                System.out.println("Would you like to start a new game?");
+                System.out.println("y/n?");
+                yesno = scan.nextLine();
+                if(yesno.charAt(0) == 'y'){
+                GameStart.start();
+                }
+                else if(yesno.charAt(0) == 'n'){
+                    System.exit(0);
+                }
+            }
+            else
+            {
             System.out.println("You defeated the enemy!");
             System.out.println("You have gained " + experiencegain + " experience!");
+            }
         }
     return experiencegain;
     }

@@ -9,7 +9,7 @@ public class Player extends LifeForm {
         this.experience = experience;
         this.level = level;
     }
-    public void gainexperience(int experiencegain, Player player){ // TODO: implement this to work with other classes
+    public void gainexperience(int experiencegain, Player player){
         this.experience = this.experience + experiencegain;
         if (this.experience >= 100){
             levelup(player);

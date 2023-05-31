@@ -3,9 +3,6 @@ public class GamePlay{
     static Scanner scan = new Scanner(System.in);
     static Random rand = new Random();
 
-    private static void createcharacter(){
-        
-    }
     public static void showstats(LifeForm creature){
         System.out.println("Name: " + creature.name + ", Health: " + creature.hp + "/" + creature.maxhp + ", Attack power: " + creature.attack + ", Mana: " + creature.mana + "/" + creature.maxmana + ", Class: " + creature.fightclass);
     }
